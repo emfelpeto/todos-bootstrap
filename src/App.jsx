@@ -1,18 +1,17 @@
 import { ListTitle } from './Components/ListTitle';
 import { TodoItem } from './Components/TodoItem';
 import { useState, useRef, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
 export default function App() {
    const initial = [
-      { id: uuidv4(), task: "Complete homework assignment", completed: false },
-      { id: uuidv4(), task: "Go for a run", completed: false },
-      { id: uuidv4(), task: "Buy groceries", completed: true },
-      { id: uuidv4(), task: "Call mom", completed: false },
-      { id: uuidv4(), task: "Read a chapter of a book", completed: true },
-      { id: uuidv4(), task: "Write a blog post", completed: false }
+      { id: crypto.randomUUID(), task: "Complete homework assignment", completed: false },
+      { id: crypto.randomUUID(), task: "Go for a run", completed: false },
+      { id: crypto.randomUUID(), task: "Buy groceries", completed: true },
+      { id: crypto.randomUUID(), task: "Call mom", completed: false },
+      { id: crypto.randomUUID(), task: "Read a chapter of a book", completed: true },
+      { id: crypto.randomUUID(), task: "Write a blog post", completed: false }
     ];
 
    const LOCALTORAGEKEY = 'todoApp.todo';
@@ -33,7 +32,7 @@ export default function App() {
       e.preventDefault();
       if (todoInputRef.current.value !== '') {
          setTodos((prevTodos) => {
-            return [...prevTodos, {id: uuidv4(), task: todoInputRef.current.value, completed: false}]
+            return [...prevTodos, {id: crypto.randomUUID(), task: todoInputRef.current.value, completed: false}]
          })
          todoInputRef.current.value = null;
          todoInputRef.current.focus()
