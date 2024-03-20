@@ -6,27 +6,24 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
 export default function App() {
-
-   const LOCALTORAGEKEY = 'todoApp.todo';
-
-   const [todos, setTodos] = useState([
+   const initial = [
       { id: uuidv4(), task: "Complete homework assignment", completed: false },
       { id: uuidv4(), task: "Go for a run", completed: false },
       { id: uuidv4(), task: "Buy groceries", completed: true },
       { id: uuidv4(), task: "Call mom", completed: false },
       { id: uuidv4(), task: "Read a chapter of a book", completed: true },
       { id: uuidv4(), task: "Write a blog post", completed: false }
-   ]);
+    ];
+
+   const LOCALTORAGEKEY = 'todoApp.todo';
+
+   const [todos, setTodos] = useState(() => {
+      const savedTodos = localStorage.getItem(LOCALTORAGEKEY);
+      return savedTodos ? JSON.parse(savedTodos) : initial;
+   });
 
    const [error, setError] = useState('');
    const todoInputRef = useRef();
-   
-   useEffect(() => {
-      const arrayString = JSON.parse(localStorage.getItem(LOCALTORAGEKEY))
-      if (arrayString) {
-         setTodos(arrayString)
-      }
-    }, []);
 
    useEffect(() => {
       localStorage.setItem(LOCALTORAGEKEY, JSON.stringify(todos));
