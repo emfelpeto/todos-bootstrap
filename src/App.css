@@ -1,0 +1,17 @@
+:root {
+    /* background-color: #31315B; */
+}
+
+.form-check-input:checked {
+    background-color: var(--bs-success-text-emphasis);
+}
+
+.container-sm {
+    max-width: 540px;
+}
+
+@media (max-width: 575.98px) {
+    .container-sm {
+        border: none !important;
+    }
+}
