@@ -12,7 +12,7 @@ export function TodoItem({todo, handleDelete, handleComplete}) {
     }
 
     return (
-        <div className={`card p-1 bg-info-subtle ${completed ? 'opacity-25' : null}`}>
+        <div className={`card p-1 bg-info-subtle ${completed ? 'completed' : null}`}>
             <div className="row g-0">
                 <div className="col-10 col-sm-11">
                     <div className="card-body d-flex align-items-center column-gap-3">

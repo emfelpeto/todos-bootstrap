@@ -16,8 +16,12 @@
     }
 }
 
-.card {
+.card:not(.completed) {
     animation: fadeIn 1s ease-out forwards;
+}
+
+.card.completed {
+    animation: fadeIn25 1s ease-out forwards;
 }
 
 @keyframes fadeIn {
@@ -26,5 +30,14 @@
     }
     100% {
         opacity: 1;
+    }
+}
+
+@keyframes fadeIn25 {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: .25;
     }
 }
