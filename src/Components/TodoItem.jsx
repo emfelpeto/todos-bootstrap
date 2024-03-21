@@ -1,7 +1,7 @@
 import React from "react";
 
 export function TodoItem({todo, handleDelete, handleComplete}) {
-    const {completed, id, task} = todo;
+    const {completed, id, title} = todo;
 
     const handleCompleteItem = () => {
         handleComplete(id);
@@ -18,7 +18,7 @@ export function TodoItem({todo, handleDelete, handleComplete}) {
                     <div className="card-body d-flex align-items-center column-gap-3">
                         <input className="form-check-input mt-0 shadow-none" type="checkbox" defaultChecked={completed} onClick={handleCompleteItem} aria-label="Checkbox for mark as completed or not" />
                         <p className={`mb-0 ${completed ? "text-decoration-line-through" : null}`}>
-                            {task}
+                            {title}
                         </p>
                     </div>
                 </div>

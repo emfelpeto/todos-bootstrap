@@ -5,34 +5,38 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
 export default function App() {
-   const initial = [
-      { id: crypto.randomUUID(), task: "Complete homework assignment", completed: false },
-      { id: crypto.randomUUID(), task: "Go for a run", completed: false },
-      { id: crypto.randomUUID(), task: "Buy groceries", completed: true },
-      { id: crypto.randomUUID(), task: "Call mom", completed: false },
-      { id: crypto.randomUUID(), task: "Read a chapter of a book", completed: true },
-      { id: crypto.randomUUID(), task: "Write a blog post", completed: false }
-    ];
+   // const initial = [
+   //    { id: crypto.randomUUID(), task: "Complete homework assignment", completed: false },
+   //    { id: crypto.randomUUID(), task: "Go for a run", completed: false },
+   //    { id: crypto.randomUUID(), task: "Buy groceries", completed: true },
+   //    { id: crypto.randomUUID(), task: "Call mom", completed: false },
+   //    { id: crypto.randomUUID(), task: "Read a chapter of a book", completed: true },
+   //    { id: crypto.randomUUID(), task: "Write a blog post", completed: false }
+   //  ];
 
    const LOCALTORAGEKEY = 'todoApp.todo';
+   const localTodos = localStorage.getItem(LOCALTORAGEKEY);
 
-   const [todos, setTodos] = useState(() => {
-      const savedTodos = localStorage.getItem(LOCALTORAGEKEY);
-      return savedTodos ? JSON.parse(savedTodos) : initial;
-   });
+   const [todos, setTodos] = useState(JSON.parse(localTodos) || []);
 
    const [error, setError] = useState('');
    const todoInputRef = useRef();
 
    useEffect(() => {
+      todos.length === 0 ? (fetch('https://jsonplaceholder.typicode.com/users/1/todos')
+      .then(response => response.json())
+      .then(json => setTodos(json))) : null
+   }, []);
+
+   useEffect(() => {
       localStorage.setItem(LOCALTORAGEKEY, JSON.stringify(todos));
-    }, [todos]);
+   }, [todos]);
 
    const handleAddItem = (e) => {
       e.preventDefault();
       if (todoInputRef.current.value !== '') {
          setTodos((prevTodos) => {
-            return [...prevTodos, {id: crypto.randomUUID(), task: todoInputRef.current.value, completed: false}]
+            return [...prevTodos, {id: crypto.randomUUID(), title: todoInputRef.current.value, completed: false}]
          })
          todoInputRef.current.value = null;
          todoInputRef.current.focus()
