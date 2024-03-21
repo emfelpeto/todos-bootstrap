@@ -23,9 +23,9 @@ export default function App() {
    const todoInputRef = useRef();
 
    useEffect(() => {
-      todos.length === 0 ? (fetch('https://jsonplaceholder.typicode.com/users/1/todos')
+      todos.length === 0 && (fetch('https://jsonplaceholder.typicode.com/users/1/todos')
       .then(response => response.json())
-      .then(json => setTodos(json))) : null
+      .then(json => setTodos(json)))
    }, []);
 
    useEffect(() => {
